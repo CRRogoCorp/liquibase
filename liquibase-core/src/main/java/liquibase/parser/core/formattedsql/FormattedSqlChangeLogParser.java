@@ -1,5 +1,6 @@
 package liquibase.parser.core.formattedsql;
 
+import io.openpixee.security.BoundedLineReader;
 import liquibase.Labels;
 import liquibase.Scope;
 import liquibase.change.Change;
@@ -37,10 +38,10 @@ public class FormattedSqlChangeLogParser implements ChangeLogParser {
                 }
                 reader = new BufferedReader(StreamUtil.readStreamWithReader(fileStream, null));
 
-                String firstLine = reader.readLine();
+                String firstLine = BoundedLineReader.readLine(reader, 1000000);
 
                 while (firstLine.trim().isEmpty() && reader.ready()) {
-                    firstLine = reader.readLine();
+                    firstLine = BoundedLineReader.readLine(reader, 1000000);
                 }
                 Pattern firstLinePattern = Pattern.compile("\\-\\-\\s*liquibase formatted.*", Pattern.CASE_INSENSITIVE);
                 return (firstLine != null) && firstLinePattern.matcher(firstLine).matches();
@@ -136,7 +137,7 @@ public class FormattedSqlChangeLogParser implements ChangeLogParser {
 
             int count = 0;
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 1000000)) != null) {
                 count++;
                 Matcher commentMatcher = commentPattern.matcher(line);
                 Matcher propertyPatternMatcher = propertyPattern.matcher(line);
@@ -162,7 +163,7 @@ public class FormattedSqlChangeLogParser implements ChangeLogParser {
                 Matcher altIgnoreLinesOneDashMatcher = altIgnoreLinesOneDashPattern.matcher(line);
                 if (ignoreLinesMatcher.matches ()) {
                     if ("start".equals(ignoreLinesMatcher.group(1))){
-                        while ((line = reader.readLine()) != null){
+                        while ((line = BoundedLineReader.readLine(reader, 1000000)) != null){
                             altIgnoreLinesOneDashMatcher = altIgnoreLinesOneDashPattern.matcher(line);
                             count++;
                             ignoreLinesMatcher = ignoreLinesPattern.matcher(line);
@@ -180,7 +181,7 @@ public class FormattedSqlChangeLogParser implements ChangeLogParser {
                     } else {
                         try {
                             long ignoreCount = Long.parseLong(ignoreLinesMatcher.group(1));
-                            while (ignoreCount > 0 && (line = reader.readLine()) != null) {
+                            while (ignoreCount > 0 && (line = BoundedLineReader.readLine(reader, 1000000)) != null) {
                                 ignoreCount--;
                                 count++;
                             }
@@ -593,7 +594,7 @@ public class FormattedSqlChangeLogParser implements ChangeLogParser {
 
         String line;
         if (reader != null) {
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 1000000)) != null) {
                 if (rollbackMultiLineEndPattern.matcher(line).matches()) {
                     String[] lastLineSplit = line.split("\\*\\/\\s*$");
                     if (lastLineSplit.length > 0 && !StringUtil.isWhitespace(lastLineSplit[0])) {
