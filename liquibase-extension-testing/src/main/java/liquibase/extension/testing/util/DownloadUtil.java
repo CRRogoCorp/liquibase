@@ -1,5 +1,7 @@
 package liquibase.extension.testing.util;
 
+import io.openpixee.security.HostValidator;
+import io.openpixee.security.Urls;
 import liquibase.Scope;
 import liquibase.exception.UnexpectedLiquibaseException;
 import liquibase.logging.Logger;
@@ -51,7 +53,7 @@ public class DownloadUtil {
             log.info("Downloading " + url + " to " + path);
 
             try {
-                final HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+                final HttpURLConnection connection = (HttpURLConnection) Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
                 connection.setRequestMethod("GET");
 
                 if (!pathAsFile.getParentFile().exists() && !pathAsFile.getParentFile().mkdirs()) {
