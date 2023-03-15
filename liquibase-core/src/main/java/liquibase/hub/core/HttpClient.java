@@ -1,5 +1,7 @@
 package liquibase.hub.core;
 
+import io.openpixee.security.HostValidator;
+import io.openpixee.security.Urls;
 import liquibase.Scope;
 import liquibase.configuration.core.DeprecatedConfigurationValueProvider;
 import liquibase.hub.HubConfiguration;
@@ -94,7 +96,7 @@ class HttpClient {
         String apiKey = HubConfiguration.LIQUIBASE_HUB_API_KEY.getCurrentValue();
 
         try {
-            final URLConnection connection = new URL(getHubUrl() + url).openConnection();
+            final URLConnection connection = Urls.create(getHubUrl() + url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
             connection.setRequestProperty("User-Agent", "Liquibase " + LiquibaseUtil.getBuildVersion());
             if (StringUtil.isNotEmpty(apiKey)) {
                 connection.setRequestProperty("Authorization", "Bearer " + apiKey);
