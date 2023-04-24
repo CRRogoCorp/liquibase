@@ -35,7 +35,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-        </dependencies>
+   <dependency>
+    <groupId>io.github.pixee</groupId>
+    <artifactId>java-security-toolkit</artifactId>
+    <version>${versions.java-security-toolkit}</version>
+   </dependency>
+  </dependencies>
     </dependencyManagement>
 
     <dependencies>
@@ -112,8 +117,11 @@
             <version>4.13.2</version>
             <scope>compile</scope>
         </dependency>
-
-    </dependencies>
+  <dependency>
+   <groupId>io.github.pixee</groupId>
+   <artifactId>java-security-toolkit</artifactId>
+  </dependency>
+ </dependencies>
 
     <build>
         <plugins>
@@ -150,4 +158,7 @@
             </plugin>
         </plugins>
     </build>
+ <properties>
+  <versions.java-security-toolkit>1.0.2</versions.java-security-toolkit>
+ </properties>
 </project>
