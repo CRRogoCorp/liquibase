@@ -108,7 +108,7 @@ public class ChangeParameterMetaData {
         Set<String> computedDatabases = new HashSet<>();
 
         if ((supportedDatabases.length == 1)
-                && StringUtil.join(supportedDatabases, ",").equals(COMPUTE)) {
+                && COMPUTE.equals(StringUtil.join(supportedDatabases, ","))) {
             int validDatabases = 0;
             for (Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
                 if ((database.getShortName() == null) || "unsupported".equals(database.getShortName())) {
@@ -158,7 +158,7 @@ public class ChangeParameterMetaData {
         Set<String> computedDatabases = new HashSet<>();
 
         if ((requiredDatabases.length == 1)
-                && StringUtil.join(requiredDatabases, ",").equals(COMPUTE)) {
+                && COMPUTE.equals(StringUtil.join(requiredDatabases, ","))) {
             int validDatabases = 0;
             for (Database database : DatabaseFactory.getInstance().getImplementedDatabases()) {
                 try {

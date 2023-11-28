@@ -61,14 +61,14 @@ public class HubChangeLog implements HubModel {
     }
 
     public boolean isActive() {
-        return status != null && status.toLowerCase().equals("active");
+        return status != null && "active".equals(status.toLowerCase());
     }
 
     public boolean isInactive() {
-        return status != null && status.toLowerCase().equals("inactive");
+        return status != null && "inactive".equals(status.toLowerCase());
     }
 
     public boolean isDeleted() {
-        return status != null && status.toLowerCase().equals("deleted");
+        return status != null && "deleted".equals(status.toLowerCase());
     }
 }

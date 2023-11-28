@@ -108,7 +108,7 @@ public class GlobalConfiguration implements AutoloadedConfigurations {
                         return (Charset) value;
                     }
                     final String valueString = String.valueOf(value);
-                    if (valueString.equalsIgnoreCase("os")) {
+                    if ("os".equalsIgnoreCase(valueString)) {
                         return Charset.defaultCharset();
                     } else {
                         return Charset.forName(valueString);

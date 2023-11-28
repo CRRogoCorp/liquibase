@@ -93,7 +93,7 @@ public class LiquibaseEntityResolver implements EntityResolver2 {
             boolean found = versionMatcher.find();
             if (found) {
                 String buildVersion = LiquibaseUtil.getBuildVersion();
-                if (!buildVersion.equals("DEV")) {
+                if (!"DEV".equals(buildVersion)) {
                     String xsdVersion = versionMatcher.group("version");
                     if (!buildVersion.startsWith(xsdVersion)) {
                         hasWarnedAboutMismatchedXsdVersion = true;

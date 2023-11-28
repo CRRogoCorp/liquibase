@@ -55,7 +55,7 @@ public abstract class AbstractPathResourceAccessor extends AbstractResourceAcces
             //
             String rootPath = getRootPath().toString();
             String result = new File(path).toPath().normalize().toString().replace("\\", "/").replaceFirst("^/", "");
-            if (rootPath.equals("/") || rootPath.equals("\\")) {
+            if ("/".equals(rootPath) || "\\".equals(rootPath)) {
                 return result;
             }
 

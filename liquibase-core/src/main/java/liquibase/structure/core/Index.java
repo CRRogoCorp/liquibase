@@ -161,7 +161,7 @@ public class Index extends AbstractDatabaseObject {
         // all the columns as actual Column objects with
         // the forIndex flag set
         //
-        if (field != null && field.equals("columns")) {
+        if (field != null && "columns".equals(field)) {
             List<Object> returnList = new ArrayList<>();
             for (Column column : getColumns()) {
                 Column c = new Column();

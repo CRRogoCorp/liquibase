@@ -26,14 +26,14 @@ public class LiquibaseUtil {
      */
     public static String getBuildVersionInfo() {
         String version = getBuildInfo("build.version");
-        if (version.equals("DEV")) {
+        if ("DEV".equals(version)) {
             final String buildCommit = getBuildInfo("build.commit");
-            if (buildCommit.equals("unknown")) {
+            if ("unknown".equals(buildCommit)) {
                 version = "[local build]";
             } else {
                 version = "[Core: " + getBuildInfo("build.repository.owner") + "/" + getBuildInfo("build.repository.name") + "/" + getBuildInfo("build.branch") + "/" + getBuildInfo("build.number") + "/" + buildCommit.substring(0, 6) + "/" + getBuildInfo("build.timestamp");
 
-                if (!getBuildInfo("build.pro.number").equals("UNKNOWN")) {
+                if (!"UNKNOWN".equals(getBuildInfo("build.pro.number"))) {
                     version += ", Pro: " + getBuildInfo("build.pro.branch") + "/" + getBuildInfo("build.pro.number") + "/" + getBuildInfo("build.pro.commit").substring(0, 6) + "/" + getBuildInfo("build.pro.timestamp");
                 }
 

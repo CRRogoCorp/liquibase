@@ -123,7 +123,7 @@ public class HubUpdater {
         Operation operation = sendStartOperationEvent(operationType, operationCommand, connection, hubChangeLog);
 
         ListVisitor listVisitor;
-        if (operationType.equalsIgnoreCase("ROLLBACK")) {
+        if ("ROLLBACK".equalsIgnoreCase(operationType)) {
             listVisitor = new RollbackListVisitor();
         } else {
             listVisitor = new ListVisitor();
@@ -455,7 +455,7 @@ public class HubUpdater {
             defaultsFile = new File(defaultsFilePath);
         }
         input = input.toLowerCase();
-        if (input.equals("n")) {
+        if ("n".equals(input)) {
             //
             // Write hub.mode=off to a properties file
             //
@@ -473,7 +473,7 @@ public class HubUpdater {
                 Scope.getCurrentScope().getUI().sendMessage(message);
                 Scope.getCurrentScope().getLog(getClass()).warning(message);
             }
-        } else if (input.equals("s")) {
+        } else if ("s".equals(input)) {
             String message = "Skipping auto-registration";
             Scope.getCurrentScope().getUI().sendMessage(message);
             Scope.getCurrentScope().getLog(getClass()).warning(message);

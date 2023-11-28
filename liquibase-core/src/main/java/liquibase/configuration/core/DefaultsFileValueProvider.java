@@ -54,7 +54,7 @@ public class DefaultsFileValueProvider extends AbstractMapConfigurationValueProv
             key = StringUtil.toCamelCase(key);
             String originalKey = key;
 
-            if (key.equalsIgnoreCase("strict") || key.startsWith("parameter.")) {
+            if ("strict".equalsIgnoreCase(key) || key.startsWith("parameter.")) {
                 continue;
             }
 

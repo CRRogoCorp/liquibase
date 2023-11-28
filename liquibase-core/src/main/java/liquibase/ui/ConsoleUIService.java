@@ -146,11 +146,11 @@ public class ConsoleUIService extends AbstractExtensibleObject implements UIServ
                 String minTtyValue = System.getenv(TERM_PROGRAM);
                 if (systemConsole == null && ! useStdIn) {
                     if (StringUtil.isNotEmpty(minTtyValue)) {
-                        useStdIn = minTtyValue.equalsIgnoreCase(MINTTY);
+                        useStdIn = MINTTY.equalsIgnoreCase(minTtyValue);
                     }
                     if (! useStdIn) {
                         String msystem = System.getenv(MSYSTEM);
-                        useStdIn = msystem != null && msystem.equalsIgnoreCase(MINGW64);
+                        useStdIn = msystem != null && MINGW64.equalsIgnoreCase(msystem);
                     }
                 }
                 this.console = new ConsoleWrapper(systemConsole, useStdIn);

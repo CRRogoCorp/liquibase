@@ -210,7 +210,7 @@ public class LiquibaseDatabaseDiff extends AbstractLiquibaseChangeLogMojo {
         // Check the Pro license if --format=JSON is specified
         //
         if (isFormattedDiff()) {
-            if (format != null && ! format.equalsIgnoreCase("json")) {
+            if (format != null && ! "json".equalsIgnoreCase(format)) {
                 String messageString =
                         "\nWARNING: The diff command 'diff --format=" + format  + "' optional Pro parameter '--format' " +
                                 "currently supports only 'TXT' or 'JSON' as values.  (Blank defaults to 'TXT')";
@@ -312,7 +312,7 @@ public class LiquibaseDatabaseDiff extends AbstractLiquibaseChangeLogMojo {
     }
 
     private boolean isFormattedDiff() {
-        return format != null && ! format.toUpperCase().equals("TXT");
+        return format != null && ! "TXT".equals(format.toUpperCase());
     }
 
     @Override
