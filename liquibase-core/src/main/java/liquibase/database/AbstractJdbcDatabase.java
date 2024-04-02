@@ -768,7 +768,7 @@ public abstract class AbstractJdbcDatabase implements Database {
                 typesToInclude.remove(PrimaryKey.class);
                 typesToInclude.remove(UniqueConstraint.class);
 
-                if (supportsForeignKeyDisable() || getShortName().equals("postgresql")) {
+                if (supportsForeignKeyDisable() || "postgresql".equals(getShortName())) {
                     //We do not remove ForeignKey because they will be disabled and removed as parts of tables.
                     // Postgress is treated as if we can disable foreign keys because we can't drop
                     // the foreign keys of a partitioned table, as discovered in

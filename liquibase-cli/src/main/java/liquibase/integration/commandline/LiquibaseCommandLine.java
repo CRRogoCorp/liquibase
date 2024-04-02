@@ -223,7 +223,7 @@ public class LiquibaseCommandLine {
             String newMessage = StringUtil.trimToNull(cleanExceptionMessage(cause.getMessage()));
             if (newMessage != null) {
                 if (!uiMessage.contains(newMessage)) {
-                    if (!uiMessage.equals("")) {
+                    if (!"".equals(uiMessage)) {
                         uiMessage += System.lineSeparator() + "  - Caused by: ";
                     }
                     uiMessage += newMessage;
@@ -416,7 +416,7 @@ public class LiquibaseCommandLine {
 
         try {
             final String monitorPerformanceValue = LiquibaseCommandLineConfiguration.MONITOR_PERFORMANCE.getCurrentValue();
-            if (monitorPerformanceValue == null || monitorPerformanceValue.equalsIgnoreCase("false")) {
+            if (monitorPerformanceValue == null || "false".equalsIgnoreCase(monitorPerformanceValue)) {
                 log.fine("Performance monitoring disabled");
                 return;
             }
@@ -428,7 +428,7 @@ public class LiquibaseCommandLine {
 
 
             String filename = monitorPerformanceValue;
-            if (filename.equalsIgnoreCase("true")) {
+            if ("true".equalsIgnoreCase(filename)) {
                 filename = "liquibase-" + new ISODateFormat().format(new Date()).replaceAll("\\W", "_") + ".jfr";
             }
             if (!filename.endsWith(".jfr")) {
@@ -699,7 +699,7 @@ public class LiquibaseCommandLine {
 
         final String configuredChannels = LiquibaseCommandLineConfiguration.LOG_CHANNELS.getCurrentValue();
         List<String> channels;
-        if (configuredChannels.equalsIgnoreCase("all")) {
+        if ("all".equalsIgnoreCase(configuredChannels)) {
             channels = new ArrayList<>(Arrays.asList("", "liquibase"));
         } else {
             channels = StringUtil.splitAndTrim(configuredChannels, ",");
@@ -710,7 +710,7 @@ public class LiquibaseCommandLine {
         }
 
         for (String channel : channels) {
-            if (channel.equalsIgnoreCase("all")) {
+            if ("all".equalsIgnoreCase(channel)) {
                 channel = "";
             }
             if (fileLogLevelOverride != null) {
@@ -897,7 +897,7 @@ public class LiquibaseCommandLine {
 
                     subCommandSpec.addOption(builder.build());
 
-                    if (argName.equals("--changelog-file")) {
+                    if ("--changelog-file".equals(argName)) {
                         final CommandLine.Model.OptionSpec.Builder paramBuilder = (CommandLine.Model.OptionSpec.Builder) CommandLine.Model.OptionSpec.builder("-D")
                                 .required(false)
                                 .type(HashMap.class)
@@ -994,11 +994,11 @@ public class LiquibaseCommandLine {
         final String header = StringUtil.trimToEmpty(commandDefinition.getGroupShortDescription(groupName));
         final String description = StringUtil.trimToEmpty(commandDefinition.getGroupLongDescription(groupName));
 
-        if (!header.equals("")) {
+        if (!"".equals(header)) {
             groupSpec.usageMessage().header("< " + header + " >\n");
         }
 
-        if (!description.equals("")) {
+        if (!"".equals(description)) {
             groupSpec.usageMessage().description(description + "\n");
         }
     }
@@ -1212,7 +1212,7 @@ public class LiquibaseCommandLine {
                         continue;
                     }
                     final File file = new File(url.toURI());
-                    if (file.getName().equals("liquibase-core.jar")) {
+                    if ("liquibase-core.jar".equals(file.getName())) {
                         continue;
                     }
                     if (file.exists() && file.getName().toLowerCase().endsWith(".jar")) {

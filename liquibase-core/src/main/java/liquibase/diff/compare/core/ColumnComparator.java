@@ -110,12 +110,12 @@ public class ColumnComparator implements DatabaseObjectComparator {
     private boolean isPostgresAutoIncrementEquivalentType(String type1, String type2) {
         if (type1.equalsIgnoreCase(type2)) {
             return true;
-        } else if (type1.equalsIgnoreCase("bigserial")) {
-            return type2.equalsIgnoreCase("bigserial") || type2.equalsIgnoreCase("int8");
-        } else if (type1.equalsIgnoreCase("serial")) {
-            return type2.equalsIgnoreCase("serial") || type2.equalsIgnoreCase("int4");
-        } else if (type1.equalsIgnoreCase("smallserial")) {
-            return type2.equalsIgnoreCase("smallserial") || type2.equalsIgnoreCase("int2");
+        } else if ("bigserial".equalsIgnoreCase(type1)) {
+            return "bigserial".equalsIgnoreCase(type2) || "int8".equalsIgnoreCase(type2);
+        } else if ("serial".equalsIgnoreCase(type1)) {
+            return "serial".equalsIgnoreCase(type2) || "int4".equalsIgnoreCase(type2);
+        } else if ("smallserial".equalsIgnoreCase(type1)) {
+            return "smallserial".equalsIgnoreCase(type2) || "int2".equalsIgnoreCase(type2);
         }
         return false;
     }

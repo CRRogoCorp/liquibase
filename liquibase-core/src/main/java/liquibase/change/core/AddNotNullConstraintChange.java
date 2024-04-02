@@ -141,7 +141,7 @@ public class AddNotNullConstraintChange extends AbstractChange {
     public SqlStatement[] generateStatements(Database database) {
         List<SqlStatement> statements = new ArrayList<>();
 
-        if (defaultNullValue != null && !defaultNullValue.equalsIgnoreCase("null")) {
+        if (defaultNullValue != null && !"null".equalsIgnoreCase(defaultNullValue)) {
             final String columnDataType = this.getColumnDataType();
 
             Object finalDefaultNullValue = defaultNullValue;

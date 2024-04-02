@@ -317,7 +317,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
             DataType type = new DataType(dataType);
             type.setDataTypeId(columnMetadataResultSet.getInt("DATA_TYPE"));
-            if (dataType.equalsIgnoreCase("NUMBER")) {
+            if ("NUMBER".equalsIgnoreCase(dataType)) {
                 type.setColumnSize(columnMetadataResultSet.getInt("DATA_PRECISION"));
 //                if (type.getColumnSize() == null) {
 //                    type.setColumnSize(38);
@@ -336,9 +336,9 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
                 boolean isTimeStampDataType = dataType.toUpperCase().contains("TIMESTAMP");
 
-                if (isTimeStampDataType || dataType.equalsIgnoreCase("NCLOB") || dataType.equalsIgnoreCase("BLOB") || dataType.equalsIgnoreCase("CLOB")) {
+                if (isTimeStampDataType || "NCLOB".equalsIgnoreCase(dataType) || "BLOB".equalsIgnoreCase(dataType) || "CLOB".equalsIgnoreCase(dataType)) {
                     type.setColumnSize(null);
-                } else if (dataType.equalsIgnoreCase("NVARCHAR") || dataType.equalsIgnoreCase("NCHAR")) {
+                } else if ("NVARCHAR".equalsIgnoreCase(dataType) || "NCHAR".equalsIgnoreCase(dataType)) {
                     type.setColumnSize(columnMetadataResultSet.getInt("CHAR_LENGTH"));
                     type.setColumnSizeUnit(DataType.ColumnSizeUnit.CHAR);
                 } else {
@@ -466,7 +466,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
         if ((database instanceof PostgresDatabase) && columnSize != null) {
             if (columnSize.equals(Integer.MAX_VALUE)) {
                 columnSize = null;
-            } else if (columnTypeName.equalsIgnoreCase("numeric") && columnSize.equals(0)) {
+            } else if ("numeric".equalsIgnoreCase(columnTypeName) && columnSize.equals(0)) {
                 columnSize = null;
             }
 

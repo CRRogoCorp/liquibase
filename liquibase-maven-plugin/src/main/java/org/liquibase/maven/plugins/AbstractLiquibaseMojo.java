@@ -668,7 +668,7 @@ public abstract class AbstractLiquibaseMojo extends AbstractMojo {
 
                     for (Parameter param : descriptor.getParameters()) {
                         final String name = param.getName();
-                        if (name.equalsIgnoreCase("project") || name.equalsIgnoreCase("systemProperties")) {
+                        if ("project".equalsIgnoreCase(name) || "systemProperties".equalsIgnoreCase(name)) {
                             continue;
                         }
 
