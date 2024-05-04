@@ -1,5 +1,6 @@
 package liquibase.integration.commandline;
 
+import io.github.pixee.security.BoundedLineReader;
 import liquibase.CatalogAndSchema;
 import liquibase.GlobalConfiguration;
 import liquibase.Scope;
@@ -310,7 +311,7 @@ public class CommandLineUtils {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
                 resultStringBuilder.append(line + "\n");
 
             }
