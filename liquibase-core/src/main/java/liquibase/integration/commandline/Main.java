@@ -515,11 +515,11 @@ public class Main {
     private static Level parseLogLevel(String logLevelName, ConsoleUIService ui) {
         logLevelName = logLevelName.toUpperCase();
         Level logLevel;
-        if (logLevelName.equals("DEBUG")) {
+        if ("DEBUG".equals(logLevelName)) {
             logLevel = Level.FINE;
-        } else if (logLevelName.equals("WARN")) {
+        } else if ("WARN".equals(logLevelName)) {
             logLevel = Level.WARNING;
-        } else if (logLevelName.equals("ERROR")) {
+        } else if ("ERROR".equals(logLevelName)) {
             logLevel = Level.SEVERE;
         } else {
             try {
@@ -619,8 +619,8 @@ public class Main {
     private static boolean isChangeLogRequired(String command) {
         return command.toLowerCase().startsWith(COMMANDS.UPDATE)
                 || (command.toLowerCase().startsWith(COMMANDS.ROLLBACK) &&
-                (!command.equalsIgnoreCase(COMMANDS.ROLLBACK_ONE_CHANGE_SET) &&
-                        !command.equalsIgnoreCase(COMMANDS.ROLLBACK_ONE_UPDATE)))
+                (!COMMANDS.ROLLBACK_ONE_CHANGE_SET.equalsIgnoreCase(command) &&
+                        !COMMANDS.ROLLBACK_ONE_UPDATE.equalsIgnoreCase(command)))
                 || COMMANDS.REGISTER_CHANGELOG.equalsIgnoreCase(command)
                 || COMMANDS.DEACTIVATE_CHANGELOG.equalsIgnoreCase(command)
                 || COMMANDS.CALCULATE_CHECKSUM.equalsIgnoreCase(command)
@@ -1220,9 +1220,9 @@ public class Main {
 
             if (isCommand(arg)) {
                 this.command = arg;
-                if (this.command.equalsIgnoreCase(COMMANDS.MIGRATE)) {
+                if (COMMANDS.MIGRATE.equalsIgnoreCase(this.command)) {
                     this.command = COMMANDS.UPDATE;
-                } else if (this.command.equalsIgnoreCase(COMMANDS.MIGRATE_SQL)) {
+                } else if (COMMANDS.MIGRATE_SQL.equalsIgnoreCase(this.command)) {
                     this.command = COMMANDS.UPDATE_SQL;
                 }
                 seenCommand = true;
@@ -2052,7 +2052,7 @@ public class Main {
 
     private boolean isFormattedDiff() throws CommandLineParsingException {
         String formatValue = getCommandParam(OPTIONS.FORMAT, "txt");
-        return !formatValue.equalsIgnoreCase("txt") && !formatValue.isEmpty();
+        return !"txt".equalsIgnoreCase(formatValue) && !formatValue.isEmpty();
     }
 
     private String getSchemaParams(Database database) throws CommandLineParsingException {
