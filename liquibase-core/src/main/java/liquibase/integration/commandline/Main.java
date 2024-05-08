@@ -1,5 +1,7 @@
 package liquibase.integration.commandline;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import liquibase.*;
 import liquibase.changelog.ChangeLogParameters;
 import liquibase.changelog.visitor.ChangeExecListener;
@@ -716,7 +718,7 @@ public class Main {
     }
 
     private static void addWarFileClasspathEntries(File classPathFile, List<URL> urls) throws IOException {
-        URL jarUrl = new URL("jar:" + classPathFile.toURI().toURL() + "!/WEB-INF/classes/");
+        URL jarUrl = Urls.create("jar:" + classPathFile.toURI().toURL() + "!/WEB-INF/classes/", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         LOG.info("adding '" + jarUrl + "' to classpath");
         urls.add(jarUrl);
 
@@ -729,7 +731,7 @@ public class Main {
                 if (entry.getName().startsWith("WEB-INF/lib")
                         && entry.getName().toLowerCase().endsWith(".jar")) {
                     File jar = extract(warZip, entry);
-                    URL newUrl = new URL("jar:" + jar.toURI().toURL() + "!/");
+                    URL newUrl = Urls.create("jar:" + jar.toURI().toURL() + "!/", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     LOG.info("adding '" + newUrl + "' to classpath");
                     urls.add(newUrl);
                     jar.deleteOnExit();
@@ -748,7 +750,7 @@ public class Main {
      */
     private static File extract(JarFile jar, JarEntry entry) throws IOException {
         // expand to temp dir and add to list
-        File tempFile = File.createTempFile("liquibase.tmp", null);
+        File tempFile = Files.createTempFile("liquibase.tmp", null).toFile();
         // read from jar and write to the tempJar file
         try (
                 BufferedInputStream inStream = new BufferedInputStream(jar.getInputStream(entry));
@@ -1412,7 +1414,7 @@ public class Main {
                             JarEntry entry = entries.nextElement();
                             if (entry.getName().toLowerCase().endsWith(".jar")) {
                                 File jar = extract(earZip, entry);
-                                URL newUrl = new URL("jar:" + jar.toURI().toURL() + "!/");
+                                URL newUrl = Urls.create("jar:" + jar.toURI().toURL() + "!/", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                                 urls.add(newUrl);
                                 LOG.fine(String.format(coreBundle.getString("adding.to.classpath"), newUrl));
                                 jar.deleteOnExit();
