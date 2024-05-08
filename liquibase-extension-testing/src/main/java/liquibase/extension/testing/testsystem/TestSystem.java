@@ -59,7 +59,7 @@ public abstract class TestSystem implements TestRule, Plugin {
     public static List<String> getEnabledTestSystems(String configuredTestSystems, String skippedTestSystems) {
         List<String> returnList;
 
-        if (StringUtil.isNotEmpty(configuredTestSystems) && configuredTestSystems.equals("all")) {
+        if (StringUtil.isNotEmpty(configuredTestSystems) && "all".equals(configuredTestSystems)) {
             ServiceLocator serviceLocator = Scope.getCurrentScope().getServiceLocator();
             returnList = serviceLocator.findInstances(TestSystem.class).stream()
                     .map(testSystem -> testSystem.getDefinition().getName()).distinct().collect(Collectors.toList());

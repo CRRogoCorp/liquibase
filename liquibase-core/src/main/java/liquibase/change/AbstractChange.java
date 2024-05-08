@@ -783,7 +783,7 @@ public abstract class AbstractChange extends AbstractPlugin implements Change {
             if ((lowerCaseKey.endsWith("name")
                         && !lowerCaseKey.contains("schema")
                         && !lowerCaseKey.contains("catalog"))
-                    || lowerCaseKey.equals("path")) {
+                    || "path".equals(lowerCaseKey)) {
                 Object currentValue = entry.getValue().getCurrentValue(this);
                 if (currentValue != null) {
                     names.add(entry.getKey()+"="+ currentValue);

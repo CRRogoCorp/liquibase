@@ -68,7 +68,7 @@ public class ClassLoaderResourceAccessor extends AbstractResourceAccessor {
 
                 for (URL url : urls) {
                     try {
-                        if (url.getProtocol().equals("file")) {
+                        if ("file".equals(url.getProtocol())) {
                             additionalResourceAccessors.addResourceAccessor(pathHandlerFactory.getResourceAccessor(url.toExternalForm()));
                         }
                     } catch (FileNotFoundException e) {
@@ -139,7 +139,7 @@ public class ClassLoaderResourceAccessor extends AbstractResourceAccessor {
         try {
             while (all.hasMoreElements()) {
                 URI uri = all.nextElement().toURI();
-                if (uri.getScheme().equals("file")) {
+                if ("file".equals(uri.getScheme())) {
                     returnList.add(new PathResource(path, Paths.get(uri)));
                 } else {
                     returnList.add(new URIResource(path, uri));

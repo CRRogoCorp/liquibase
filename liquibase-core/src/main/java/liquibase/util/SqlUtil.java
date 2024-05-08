@@ -201,7 +201,7 @@ public abstract class SqlUtil {
             } else if (typeId == Types.DATALINK) {
                 return new DatabaseFunction(stringVal);
             } else if (liquibaseDataType instanceof DateType || typeId == Types.DATE) {
-                if (typeName.equalsIgnoreCase("year")) {
+                if ("year".equalsIgnoreCase(typeName)) {
                     return stringVal.trim();
                 }
                 return DataTypeFactory.getInstance().fromDescription("date", database).sqlToObject(stringVal, database);
@@ -254,7 +254,7 @@ public abstract class SqlUtil {
                     }
                     return scanner.nextBigDecimal();
                 } else {
-                    if (stringVal.equals("")) {
+                    if ("".equals(stringVal)) {
                         return new DatabaseFunction("''"); //can have numeric default '' on sql server
                     }
                     return new DatabaseFunction(stringVal);
@@ -262,7 +262,7 @@ public abstract class SqlUtil {
             } else if (liquibaseDataType instanceof NVarcharType || typeId == Types.NVARCHAR) {
                 return stringVal;
             } else if (typeId == Types.OTHER) {
-                if (database instanceof AbstractDb2Database && typeName.equalsIgnoreCase("DECFLOAT")) {
+                if (database instanceof AbstractDb2Database && "DECFLOAT".equalsIgnoreCase(typeName)) {
                     return new BigDecimal(stringVal);
                 }
                 return new DatabaseFunction(stringVal);
@@ -304,7 +304,7 @@ public abstract class SqlUtil {
             } else if ((database instanceof MSSQLDatabase) && typeName.toLowerCase().startsWith("datetimeoffset")) {
                 return stringVal;
             } else {
-                if (stringVal.equals("")) {
+                if ("".equals(stringVal)) {
                     return stringVal;
                 }
                 Scope.getCurrentScope().getLog(SqlUtil.class).info("Unknown default value: value '" + stringVal +

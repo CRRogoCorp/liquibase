@@ -72,7 +72,7 @@ public class TestFilter {
     }
 
     private void parseAndAdd(String input, String desc, Map<String, String> output) {
-        if (input == null || input.equals("")) {
+        if (input == null || "".equals(input)) {
             return;
         }
         // This is the start of a string that comes from Intellij Idea if you copy the test definition from the run window.

@@ -312,7 +312,7 @@ public class LiquibaseDatabaseDiff extends AbstractLiquibaseChangeLogMojo {
     }
 
     private boolean isFormattedDiff() {
-        return format != null && ! format.toUpperCase().equals("TXT");
+        return format != null && ! "TXT".equals(format.toUpperCase());
     }
 
     @Override
