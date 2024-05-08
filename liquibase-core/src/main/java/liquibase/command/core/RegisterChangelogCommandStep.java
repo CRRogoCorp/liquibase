@@ -166,7 +166,7 @@ public class RegisterChangelogCommandStep extends AbstractHubChangelogCommandSte
         while (!done) {
             input = readProjectFromConsole(projects, changeLogFile);
             try {
-                if (input.equalsIgnoreCase("C")) {
+                if ("C".equalsIgnoreCase(input)) {
                     String projectName = readProjectNameFromConsole();
                     if (StringUtil.isEmpty(projectName)) {
                         ui.sendMessage("\nNo project created\n");
@@ -183,7 +183,7 @@ public class RegisterChangelogCommandStep extends AbstractHubChangelogCommandSte
                     projects = getProjectsFromHub();
                     done = true;
                     continue;
-                } else if (input.equalsIgnoreCase("N")) {
+                } else if ("N".equalsIgnoreCase(input)) {
                     throw new CommandExecutionException("Your changelog " + changeLogFile + " was not registered to any Liquibase Hub project. You can still run Liquibase commands, but no data will be saved in your Liquibase Hub account for monitoring or reports.  Learn more at https://hub.liquibase.com.");
                 }
                 int projectIdx = Integer.parseInt(input);

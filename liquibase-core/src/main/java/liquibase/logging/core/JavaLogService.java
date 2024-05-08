@@ -52,7 +52,7 @@ public class JavaLogService extends AbstractLogService {
         }
 
         final String classPackageName = clazz.getPackage().getName();
-        if (classPackageName.equals("liquibase")) {
+        if ("liquibase".equals(classPackageName)) {
             return "liquibase";
         }
 
@@ -65,7 +65,7 @@ public class JavaLogService extends AbstractLogService {
                 continue;
             }
             final String interfaceLog = getLogName(iface);
-            if (!interfaceLog.equals("liquibase")) {
+            if (!"liquibase".equals(interfaceLog)) {
                 return interfaceLog;
             }
         }
@@ -73,7 +73,7 @@ public class JavaLogService extends AbstractLogService {
         final Class superclass = clazz.getSuperclass();
         if (superclass != null && !superclass.equals(Object.class)) {
             final String superclassLogName = getLogName(superclass);
-            if (!superclassLogName.equals("liquibase")) {
+            if (!"liquibase".equals(superclassLogName)) {
                 return superclassLogName;
             }
         }

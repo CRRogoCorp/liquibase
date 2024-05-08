@@ -376,7 +376,7 @@ public class HubChangeExecListener extends AbstractChangeExecListener
         //
         OperationChangeEvent operationChangeEvent = new OperationChangeEvent();
         List<String> sqlList = new ArrayList<>();
-        if (! eventType.equals("SYNC")) {
+        if (! "SYNC".equals(eventType)) {
             List<Change> changes = changeSet.getChanges();
             for (Change change : changes) {
                 try {

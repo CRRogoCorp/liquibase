@@ -170,11 +170,11 @@ public class ColumnAutoIncrementService {
             column.setAutoIncrementInformation(null);
         } else if (database instanceof PostgresDatabase && PostgresDatabase.VALID_AUTO_INCREMENT_COLUMN_TYPE_NAMES.stream().noneMatch(typeName -> typeName.equalsIgnoreCase((String) columnMetadataResultSet.get("TYPE_NAME")))) {
             column.setAutoIncrementInformation(null);
-        } else if (isAutoincrement.equals("YES")) {
+        } else if ("YES".equals(isAutoincrement)) {
             column.setAutoIncrementInformation(new Column.AutoIncrementInformation());
-        } else if (isAutoincrement.equals("NO")) {
+        } else if ("NO".equals(isAutoincrement)) {
             column.setAutoIncrementInformation(null);
-        } else if (isAutoincrement.equals("")) {
+        } else if ("".equals(isAutoincrement)) {
             Scope.getCurrentScope().getLog(getClass()).info("Unknown auto increment state for column " + column.toString() + ". Assuming not auto increment");
             column.setAutoIncrementInformation(null);
         } else {

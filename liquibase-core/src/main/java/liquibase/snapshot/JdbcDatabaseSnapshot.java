@@ -482,7 +482,7 @@ public class JdbcDatabaseSnapshot extends DatabaseSnapshot {
                             int rowDataType = row.getInt("DATA_TYPE");
                             if (rowTableName.equalsIgnoreCase(selectedTableName) &&
                                 rowColumnName.equalsIgnoreCase(selectedColumnName) &&
-                                rowTypeName.equalsIgnoreCase("datetime") &&
+                                "datetime".equalsIgnoreCase(rowTypeName) &&
                                 rowDataType == Types.OTHER &&
                                 !rowTypeName.equalsIgnoreCase(actualDataType)) {
                                 row.set("TYPE_NAME", actualDataType);

@@ -85,7 +85,7 @@ public class JdbcConnection implements DatabaseConnection {
                 throw new DatabaseException(errorMessage + ".  Possibly the wrong driver for the given database URL");
             }
         } catch (SQLException sqle) {
-            if (driverClassName.equals("org.h2.Driver")) {
+            if ("org.h2.Driver".equals(driverClassName)) {
                 errorMessage += ". Make sure your H2 database is active and accessible by opening a new terminal window, run \"liquibase init start-h2\", and then return to this terminal window to run commands";
             }
             throw new DatabaseException(errorMessage + ".  " + sqle.getMessage(), sqle);

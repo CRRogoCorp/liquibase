@@ -21,11 +21,11 @@ public interface ConfigurationValueConverter<DataType> {
             return (Level) value;
         }
         String stringLevel = String.valueOf(value).toUpperCase();
-        if (stringLevel.equals("DEBUG")) {
+        if ("DEBUG".equals(stringLevel)) {
             return Level.FINE;
-        } else if (stringLevel.equals("WARN")) {
+        } else if ("WARN".equals(stringLevel)) {
             return Level.WARNING;
-        } else if (stringLevel.equals("ERROR")) {
+        } else if ("ERROR".equals(stringLevel)) {
             return Level.SEVERE;
         }
 
